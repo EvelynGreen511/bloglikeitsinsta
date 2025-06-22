@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Blog like it\'s Insta</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_wordpress_verbindung">Wordpress Verbindung</string>
+
+    <string name="wordpress_config_title">WordPress Configuration</string>
+    <string name="wordpress_config_url">WordPress URL"</string>
+    <string name="wordpress_confiig_username">Username</string>
+    <string name="wordpress_config_password">Password</string>
+    <string name="wordpress_config_save_settings">Save Settings</string>
+    <string name="wordpress_config_test_connection">Test Connection</string>
+    <string name="wordpress_config_clear_token">Clear Token</string>
+    <string name="wordpress_config_novalidtoken">❌ No Valid Token</string>
+    <string name="wordpress_config_connection_status">Connection Status</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>
