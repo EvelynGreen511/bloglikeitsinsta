@@ -1,12 +1,18 @@
 package com.example.bloglikeitsinsta.wordpress.repository
 
 import android.util.Log
+import com.example.bloglikeitsinsta.wordpress.model.MediaResponse
 import com.example.bloglikeitsinsta.wordpress.api.RetrofitManager
 import com.example.bloglikeitsinsta.wordpress.api.WordPressApiService
 import com.example.bloglikeitsinsta.wordpress.model.AuthResponse
+import com.example.bloglikeitsinsta.wordpress.model.CreatePostRequest
 import com.example.bloglikeitsinsta.wordpress.model.WordPressPost
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -58,6 +64,7 @@ class WordPressRepository @Inject constructor(
             if (response.isSuccessful && response.body() != null) {
                 emit(Result.success(response.body()!!))
             } else {
+                Log.e("WordPressRepository", response.headers().joinToString())
                 emit(Result.failure(Exception("Failed to fetch posts: ${response.message()}")))
             }
         } catch (e: Exception) {
@@ -99,22 +106,39 @@ class WordPressRepository @Inject constructor(
         status: String = "publish"
     ): Result<WordPressPost> {
         return try {
-            val postData = mutableMapOf<String, Any>(
-                "title" to title,
-                "content" to content,
-                "excerpt" to excerpt,
-                "status" to status,
-                "categories" to categories,
-                "tags" to tags
+            val postData = CreatePostRequest(
+                title = title,
+                content = content,
+                excerpt = excerpt,
+                status = status,
+                categories = categories,
+                tags = tags,
+                featured_media = featuredMediaId
             )
-
-            featuredMediaId?.let { postData["featured_media"] = it }
 
             val response = apiService.createPost("Bearer $token", postData)
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!)
             } else {
-                Result.failure(Exception("Failed to create post: ${response.message()}"))
+                val errorBody = response.errorBody()?.string()
+                Log.e("WordPressRepository", "Create post error: $errorBody")
+                Result.failure(Exception("Failed to create post: ${response.message()} - $errorBody"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun uploadMedia(token: String, file: File, mimeType: String): Result<MediaResponse> {
+        return try {
+            val requestFile = file.asRequestBody(mimeType.toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            val response = apiService.uploadMedia("Bearer $token", body)
+            if (response.isSuccessful && response.body() != null) {
+                Result.success(response.body()!!)
+            } else {
+                Log.e("WordpressRepository", "" + response.errorBody()?.string())
+                Result.failure(Exception("Failed to upload media: ${response.message()}"))
             }
         } catch (e: Exception) {
             Result.failure(e)

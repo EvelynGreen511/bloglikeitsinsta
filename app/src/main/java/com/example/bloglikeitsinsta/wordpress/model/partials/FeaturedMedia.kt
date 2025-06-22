@@ -1,7 +1,10 @@
 package com.example.bloglikeitsinsta.wordpress.model.partials
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class FeaturedMedia(
     @SerializedName("id")
     val id: Int,
@@ -11,4 +14,4 @@ data class FeaturedMedia(
 
     @SerializedName("alt_text")
     val altText: String
-)
+) : Parcelable

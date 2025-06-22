@@ -9,7 +9,15 @@
         android:id="@+id/nav_home"
         android:name="com.example.bloglikeitsinsta.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action android:id="@+id/action_nav_home_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+        <action
+            android:id="@+id/action_global_createPostFragment"
+            app:destination="@id/createPostFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -28,4 +36,22 @@
         android:name="com.example.bloglikeitsinsta.ui.configuration.WordpressConnectionFragment"
         android:label="@string/action_wordpress_verbindung"
         tools:layout="@layout/fragment_wordpress_connection" />
+
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.example.bloglikeitsinsta.ui.postdetail.PostDetailFragment"
+        android:label="Post Details"
+        tools:layout="@layout/fragment_post_detail">
+
+        <argument
+            android:name="post"
+            app:argType="com.example.bloglikeitsinsta.wordpress.model.WordPressPost" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.example.bloglikeitsinsta.ui.create.CreatePostFragment"
+        android:label="Create Post"
+        tools:layout="@layout/fragment_create_post" />
 </navigation>

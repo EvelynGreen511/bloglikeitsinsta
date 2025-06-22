@@ -1,6 +1,8 @@
 package com.example.bloglikeitsinsta.wordpress.api
 
 import com.example.bloglikeitsinsta.wordpress.model.AuthResponse
+import com.example.bloglikeitsinsta.wordpress.model.CreatePostRequest
+import com.example.bloglikeitsinsta.wordpress.model.MediaResponse
 import com.example.bloglikeitsinsta.wordpress.model.WordPressPost
 import retrofit2.Response
 import retrofit2.http.*
@@ -28,7 +30,7 @@ interface WordPressApiService {
     /**
      * Get posts (public - no auth required)
      */
-    @GET("wp/v2/posts")
+    @GET("wp-json/wp/v2/posts")
     suspend fun getPosts(
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 10,
@@ -52,7 +54,7 @@ interface WordPressApiService {
     @POST("wp-json/wp/v2/posts")
     suspend fun createPost(
         @Header("Authorization") token: String,
-        @Body post: Map<String, Any>
+        @Body postData: CreatePostRequest
     ): Response<WordPressPost>
 
     /**
@@ -62,8 +64,6 @@ interface WordPressApiService {
     @POST("wp-json/wp/v2/media")
     suspend fun uploadMedia(
         @Header("Authorization") token: String,
-        @Part("title") title: String,
-        @Part("alt_text") altText: String,
         @Part file: okhttp3.MultipartBody.Part
-    ): Response<Any>
+    ): Response<MediaResponse>
 }

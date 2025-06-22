@@ -1,6 +1,4 @@
 package com.example.bloglikeitsinsta.wordpress.api
-
-import android.util.Log
 import com.example.bloglikeitsinsta.wordpress.config.SecureConfigManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -22,7 +20,6 @@ class RetrofitManager @Inject constructor(
             .build()
 
         val baseUrl = configManager.getWordPressUrl()
-        Log.e("wordpress url: ", baseUrl)
         // If the URL changed, rebuild Retrofit
         if (retrofit == null || retrofit!!.baseUrl().toString() != baseUrl) {
             retrofit = Retrofit.Builder()

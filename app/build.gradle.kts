@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
     kotlin("kapt")
 }
 
@@ -56,6 +58,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
+    implementation(libs.coil)
+
     // Hilt dependencies
     implementation(libs.androidx.core)
     implementation(libs.hilt.android)
@@ -77,6 +81,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //layout
+    implementation(libs.androidx.swiperefreshlayout)
 }
 
 kapt {

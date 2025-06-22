@@ -7,6 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="action_wordpress_verbindung">Wordpress Verbindung</string>
+    <string name="floating_action_button_description">Create New Post</string>
 
     <string name="wordpress_config_title">WordPress Configuration</string>
     <string name="wordpress_config_url">WordPress URL"</string>
@@ -14,9 +15,17 @@
     <string name="wordpress_config_password">Password</string>
     <string name="wordpress_config_save_settings">Save Settings</string>
     <string name="wordpress_config_test_connection">Test Connection</string>
-    <string name="wordpress_config_clear_token">Clear Token</string>
+    <string name="wordpress_config_clear_token">Clear\nToken</string>
     <string name="wordpress_config_novalidtoken">❌ No Valid Token</string>
     <string name="wordpress_config_connection_status">Connection Status</string>
+
+    <string name="home_no_posts">No posts available</string>
+
+    <string name="create_post_select_image">Select an image</string>
+    <string name="create_post_write_title">Headline</string>
+    <string name="create_post_write_post">Write your post…</string>
+    <string name="create_post_publish">Publish</string>
+    <string name="create_post_image_default_description">Uploaded Image</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>

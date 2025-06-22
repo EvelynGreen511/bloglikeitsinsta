@@ -1,11 +1,14 @@
 package com.example.bloglikeitsinsta.wordpress.model
 
+import android.os.Parcelable
 import com.example.bloglikeitsinsta.wordpress.model.partials.Content
 import com.example.bloglikeitsinsta.wordpress.model.partials.Embedded
 import com.example.bloglikeitsinsta.wordpress.model.partials.Excerpt
 import com.example.bloglikeitsinsta.wordpress.model.partials.Title
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class WordPressPost (
     @SerializedName("id")
     val id: Int,
@@ -39,4 +42,4 @@ data class WordPressPost (
 
     @SerializedName("_embedded")
     val embedded: Embedded?
-)
+) : Parcelable
